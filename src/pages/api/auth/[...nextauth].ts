@@ -5,8 +5,8 @@ const admins = [
   {
     id: "1",
     name: "Admin User",
-    email: "admin@sru.edu.in",
-    password: "adminpassword", // In prod, hash & env vars recommended
+    email: "process.env.ADMIN_EMAIL!",
+    password: "process.env.ADMIN_PASSWORD!", // In prod, hash & env vars recommended
   },
 ];
 
