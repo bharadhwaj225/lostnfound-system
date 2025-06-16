@@ -1,15 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const admins = [
-  {
-    id: "1",
-    name: "Admin User",
-    email: "process.env.ADMIN_EMAIL!",
-    password: "process.env.ADMIN_PASSWORD!", // In prod, hash & env vars recommended
-  },
-];
-
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -19,18 +10,26 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const user = admins.find(
-          (admin) =>
-            admin.email === credentials?.email && admin.password === credentials?.password
-        );
-        if (user) return user;
+        const adminEmail = process.env.ADMIN_EMAIL;
+        const adminPassword = process.env.ADMIN_PASSWORD;
+
+        if (
+          credentials?.email === adminEmail &&
+          credentials?.password === adminPassword
+        ) {
+          return {
+            id: "1",
+            name: "Admin User",
+            email: adminEmail,
+          };
+        }
+
         return null;
       },
     }),
   ],
   callbacks: {
-    async session({ session, token }) {
-      // Add role or admin flag to session
+    async session({ session }) {
       session.user.role = "admin";
       return session;
     },
