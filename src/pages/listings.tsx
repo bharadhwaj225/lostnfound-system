@@ -3,6 +3,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { formatDistanceToNow } from "date-fns";
+import Head from "next/head";
 
 type Item = {
   _id: string;
@@ -100,6 +101,11 @@ export default function Listings() {
 
   return (
     <>
+      <Head>
+        <title>All Lost & Found Listings | Lost & Found</title>
+        <meta name="description" content="Browse all reported lost and found items by category, date, and location." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-10">
         <h1 className="text-3xl font-bold mb-4 mt-3">Item Listings</h1>
@@ -161,9 +167,6 @@ export default function Listings() {
             Found Items
           </button>
         </div>
-
-
-
 
         {loading && <p>Loading items...</p>}
         {error && <p className="text-red-600">{error}</p>}

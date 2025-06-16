@@ -5,6 +5,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { format } from "date-fns";
+import Head from "next/head";
 
 type FoundItem = {
   _id: string;
@@ -69,8 +70,16 @@ export default function FoundItemDetails({ item }: Props) {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {item && (
+        <Head>
+          <title>{`Found Item ${item.itemName} | Lost & Found`}</title>
+          <meta
+            name="description"
+            content={`Details for lost item ${item.itemName}. Reported lost near ${item.location}.`}
+          />
+        </Head>
+      )}
       <Navbar />
-
       <main className="flex-1 py-12 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="inline-block mb-6">

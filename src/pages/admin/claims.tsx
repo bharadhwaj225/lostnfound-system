@@ -2,6 +2,7 @@ import Link from "next/link";
 import AdminNavbar from "@/components/admin/AdminNavbar";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 type Claim = {
   _id: string;
@@ -40,6 +41,10 @@ export default function AdminClaims() {
 
   return (
     <div>
+      <Head>
+        <title>Manage Claims | Admin Dashboard</title>
+        <meta name="description" content="Review and approve claims on reported items to ensure rightful returns." />
+      </Head>
       <AdminNavbar />
       <div className="p-6">
         <h1 className="text-2xl font-bold mb-4">Claims</h1>

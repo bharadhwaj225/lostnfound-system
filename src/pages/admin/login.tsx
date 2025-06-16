@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Label } from "@/components/ui/label";
+import Head from "next/head";
 
 export default function AdminLogin() {
   const [email, setEmail] = useState("");
@@ -30,6 +31,10 @@ export default function AdminLogin() {
 
   return (
     <>
+      <Head>
+        <title>Admin Login | Lost & Found</title>
+        <meta name="description" content="Secure login portal for administrators to manage reports and user activity." />
+      </Head>
       <Navbar />
       <div className="max-w-sm mx-auto mt-20 p-6 border-none rounded shadow">
         <h1 className="text-2xl text-center mb-4 font-bold">Admin Login</h1>

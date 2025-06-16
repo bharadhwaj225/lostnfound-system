@@ -1,5 +1,6 @@
 import AdminNavbar from "@/components/admin/AdminNavbar";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 
 type Item = {
@@ -28,6 +29,10 @@ export default function DeletedItemsPage() {
 
   return (
     <div>
+      <Head>
+        <title>Deleted Items | Admin Dashboard</title>
+        <meta name="description" content="View and manage items that have been deleted from the system. Restore or permanently remove entries." />
+      </Head>
       <AdminNavbar />
       <div className="p-6">
         <h1 className="text-2xl font-bold mb-4">Deleted Items</h1>

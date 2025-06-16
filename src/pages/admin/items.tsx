@@ -2,6 +2,7 @@ import AdminNavbar from "@/components/admin/AdminNavbar";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Head from "next/head";
 
 type Item = {
   _id: string;
@@ -53,71 +54,77 @@ export default function AdminItems() {
   };
 
   return (
-    <div>
-      <AdminNavbar />
-      <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">All Items</h1>
+    <>
+      <Head>
+        <title>Manage Items | Admin Dashboard</title>
+        <meta name="description" content="View, verify, and manage all reported lost and found items in the system." />
+      </Head>
+      <div>
+        <AdminNavbar />
+        <div className="p-6">
+          <h1 className="text-2xl font-bold mb-4">All Items</h1>
 
-        <section>
-          <h2 className="text-xl font-semibold mb-2">Lost Items</h2>
-          {lostItems.length === 0 ? (
-            <p>No lost items.</p>
-          ) : (
-            lostItems.map(item => (
-              <div
-                key={item._id}
-                className="flex items-center justify-between shadow-md p-3 rounded mb-2 hover:bg-gray-100 transition"
-              >
-                <Link
-                  href={{
-                    pathname: `/admin/items/${item._id}`,
-                    query: { status: item.status },
-                  }}
-                  className="flex-1"
+          <section>
+            <h2 className="text-xl font-semibold mb-2">Lost Items</h2>
+            {lostItems.length === 0 ? (
+              <p>No lost items.</p>
+            ) : (
+              lostItems.map(item => (
+                <div
+                  key={item._id}
+                  className="flex items-center justify-between shadow-md p-3 rounded mb-2 hover:bg-gray-100 transition"
                 >
-                  {item.itemName}
-                </Link>
-                <button
-                  onClick={() => handleDeleteItem(item._id, item.status)}
-                  className="ml-4 text-sm bg-red-600 text-white px-3 py-1 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            ))
-          )}
-        </section>
+                  <Link
+                    href={{
+                      pathname: `/admin/items/${item._id}`,
+                      query: { status: item.status },
+                    }}
+                    className="flex-1"
+                  >
+                    {item.itemName}
+                  </Link>
+                  <button
+                    onClick={() => handleDeleteItem(item._id, item.status)}
+                    className="ml-4 text-sm bg-red-600 text-white px-3 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))
+            )}
+          </section>
 
-        <section className="mt-6">
-          <h2 className="text-xl font-semibold mb-2">Found Items</h2>
-          {foundItems.length === 0 ? (
-            <p>No found items.</p>
-          ) : (
-            foundItems.map(item => (
-              <div
-                key={item._id}
-                className="flex items-center justify-between shadow-md p-3 rounded mb-2 hover:bg-gray-100 transition"
-              >
-                <Link
-                  href={{
-                    pathname: `/admin/items/${item._id}`,
-                    query: { status: item.status },
-                  }}
-                  className="flex-1"
+          <section className="mt-6">
+            <h2 className="text-xl font-semibold mb-2">Found Items</h2>
+            {foundItems.length === 0 ? (
+              <p>No found items.</p>
+            ) : (
+              foundItems.map(item => (
+                <div
+                  key={item._id}
+                  className="flex items-center justify-between shadow-md p-3 rounded mb-2 hover:bg-gray-100 transition"
                 >
-                  {item.itemName}
-                </Link>
-                <button
-                  onClick={() => handleDeleteItem(item._id, item.status)}
-                  className="ml-4 text-sm bg-red-600 text-white px-3 py-1 rounded"
-                >
-                  Delete
-                </button>
-              </div>
-            ))
-          )}
-        </section>
+                  <Link
+                    href={{
+                      pathname: `/admin/items/${item._id}`,
+                      query: { status: item.status },
+                    }}
+                    className="flex-1"
+                  >
+                    {item.itemName}
+                  </Link>
+                  <button
+                    onClick={() => handleDeleteItem(item._id, item.status)}
+                    className="ml-4 text-sm bg-red-600 text-white px-3 py-1 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))
+            )}
+          </section>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

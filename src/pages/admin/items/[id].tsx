@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import Link from "next/link";
+import Head from "next/head";
 
 type AdminItem = {
   _id: string;
@@ -88,6 +89,16 @@ export default function AdminItemDetail() {
   }
 
   return (
+    <>
+    {item && (
+  <Head>
+    <title>{`${item.status === "lost" ? "Lost" : "Found"} Item ${item.itemName} | Admin Panel`}</title>
+    <meta
+      name="description"
+      content={`Admin view of ${item.status} item: ${item.itemName}, reported near ${item.location}.`}
+    />
+    </Head>
+)}
     <div className="min-h-screen flex flex-col">
       <AdminNavbar />
       <main className="flex-1 py-12 bg-gray-50">
@@ -166,5 +177,6 @@ export default function AdminItemDetail() {
         </div>
       </main>
     </div>
+    </>
   );
 }

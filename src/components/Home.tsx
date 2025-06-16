@@ -1,9 +1,16 @@
 import Link from "next/link";
 import Navbar from "./Navbar";
+import Head from "next/head";
+
 
 const Home = () => {
   return (
     <>
+      <Head>
+        <title>Lost & Found | Recover Lost Items or Report Found Items</title>
+        <meta name="description" content="Quickly report lost or found items and browse recent reports in your area. Helping people reconnect with their belongings." />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Navbar />
       <section className="bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 sm:py-24">

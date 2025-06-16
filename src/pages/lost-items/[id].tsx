@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import Link from "next/link";
+import Head from "next/head";
 
 type LostItem = {
   _id: string;
@@ -97,6 +98,15 @@ export default function LostItemDetail() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      {item && (
+        <Head>
+          <title>{`Lost Item ${item.itemName} | Lost & Found`}</title>
+          <meta
+            name="description"
+            content={`Details for lost item  ${item.itemName}. Reported lost near ${item.location}.`}
+          />
+        </Head>
+      )}
       <Navbar />
       <main className="flex-1 py-12 bg-gray-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

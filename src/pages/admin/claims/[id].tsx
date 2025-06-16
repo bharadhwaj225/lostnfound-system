@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import AdminNavbar from "@/components/admin/AdminNavbar";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import Link from "next/link";
+import Head from "next/head";
 
 type Claim = {
   _id: string;
@@ -66,68 +67,76 @@ export default function AdminClaimDetail() {
   }
 
   return (
-    <div className="min-h-screen">
-      <AdminNavbar />
-      <main className="max-w-3xl mx-auto p-6">
-        <Link href="/admin/claims" className="text-sm text-gray-600 hover:underline mb-4 block">
-          ← Back to Claims
-        </Link>
+    <>
+      {claim && (
+        <Head>
+          <title>Claim by {claim.name}</title>
+          <meta name="description" content={`Claim for item ${claim.itemId} by ${claim.name}.`} />
+        </Head>
+      )}
+      <div className="min-h-screen">
+        <AdminNavbar />
+        <main className="max-w-3xl mx-auto p-6">
+          <Link href="/admin/claims" className="text-sm text-gray-600 hover:underline mb-4 block">
+            ← Back to Claims
+          </Link>
 
-        <div className="bg-white shadow rounded p-6 space-y-4">
-          <h1 className="text-2xl font-bold">Claim by {claim.name}</h1>
-          <p><strong>Email:</strong> {claim.email}</p>
-          <p><strong>Item Type:</strong> {claim.itemType}</p>
-          <p><strong>Item ID:</strong> {claim.itemId}</p>
-          <p><strong>Status:</strong>{" "}
-            <span
-              className={`px-2 py-1 rounded text-white text-sm ${claim.status === "approved"
+          <div className="bg-white shadow rounded p-6 space-y-4">
+            <h1 className="text-2xl font-bold">Claim by {claim.name}</h1>
+            <p><strong>Email:</strong> {claim.email}</p>
+            <p><strong>Item Type:</strong> {claim.itemType}</p>
+            <p><strong>Item ID:</strong> {claim.itemId}</p>
+            <p><strong>Status:</strong>{" "}
+              <span
+                className={`px-2 py-1 rounded text-white text-sm ${claim.status === "approved"
                   ? "bg-green-600"
                   : claim.status === "rejected"
                     ? "bg-red-600"
                     : "bg-yellow-500"
-                }`}
-            >
-              {claim.status}
-            </span>
-          </p>
+                  }`}
+              >
+                {claim.status}
+              </span>
+            </p>
 
-          <div>
-            <p className="font-medium">Proof Message:</p>
-            <p className="text-gray-700 whitespace-pre-line">{claim.proofMessage}</p>
-          </div>
-
-          {claim.proofFileUrl && (
             <div>
-              <p className="font-medium">Proof File:</p>
-              <a
-                href={claim.proofFileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:underline"
-              >
-                View Uploaded File
-              </a>
+              <p className="font-medium">Proof Message:</p>
+              <p className="text-gray-700 whitespace-pre-line">{claim.proofMessage}</p>
             </div>
-          )}
 
-          {claim.status === "pending" && (
-            <div className="flex gap-4 mt-6">
-              <button
-                onClick={() => handleAction("approve")}
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-              >
-                Approve
-              </button>
-              <button
-                onClick={() => handleAction("reject")}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
-              >
-                Reject
-              </button>
-            </div>
-          )}
-        </div>
-      </main>
-    </div>
+            {claim.proofFileUrl && (
+              <div>
+                <p className="font-medium">Proof File:</p>
+                <a
+                  href={claim.proofFileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:underline"
+                >
+                  View Uploaded File
+                </a>
+              </div>
+            )}
+
+            {claim.status === "pending" && (
+              <div className="flex gap-4 mt-6">
+                <button
+                  onClick={() => handleAction("approve")}
+                  className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={() => handleAction("reject")}
+                  className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+                >
+                  Reject
+                </button>
+              </div>
+            )}
+          </div>
+        </main>
+      </div>
+    </>
   );
 }

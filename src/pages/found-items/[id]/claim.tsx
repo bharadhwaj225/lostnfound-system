@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
@@ -47,6 +48,10 @@ export default function ClaimItem() {
 
   return (
     <>
+      <Head>
+        <title>Claim an Item | Lost & Found</title>
+        <meta name="description" content="Think you found your item? Submit a claim with proof to request its return." />
+      </Head>
       <Navbar />
       <div className="max-w-lg mx-auto mt-12 p-8 bg-white rounded-2xl shadow-lg border border-gray-200">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">
